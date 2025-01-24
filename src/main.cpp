@@ -5,7 +5,7 @@
 #include "bubblepump.hpp"
 
 LGFX_Sprite buffer(&StickCP2.Display);
-Test bubblePump;
+BubblePump bubblePump;
 
 void setup(void)
 {
@@ -24,7 +24,7 @@ void setup(void)
     buffer.setFont(&fonts::FreeMono9pt7b);
     buffer.createSprite(240, 135);
 
-    bubblePump.setup(std::make_shared<LGFX_Sprite>(&buffer));
+    bubblePump.setup(std::make_shared<LGFX_Sprite>(buffer));
 }
 
 void gameOver()
@@ -52,7 +52,7 @@ void gameOverWin()
     buffer.clear();
     buffer.setTextColor(GREEN);
     buffer.print("YOU WIN");
-    buffer.pushSprite(0, 0); // Push the buffer to the display
+    buffer.pushSprite(0, 0);
     delay(5000);
     while (1)
     {

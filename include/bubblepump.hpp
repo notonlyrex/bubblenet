@@ -17,6 +17,7 @@ public:
         }
 
         buffer->clear();
+        buffer->setCursor(10, 10);
         buffer->print("Hello");
 
         return LevelResult::Continue;
