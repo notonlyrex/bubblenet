@@ -36,7 +36,7 @@ public:
         buffer->clear();
         drawBubble();
         buffer->setCursor(10, 10);
-        buffer->printf("Time left: %d", timeLeft / 100);
+        buffer->printf("Time left: %.2f", timeLeft / 100.0f);
 
         if (button)
         {
