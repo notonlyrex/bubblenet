@@ -2,13 +2,10 @@
 #include <WiFi.h>
 #include <SPIFFS.h>
 
-int r = 1;
+#include "bubblepump.hpp"
+
 LGFX_Sprite buffer(&StickCP2.Display);
-
-long last = 0;
-int timeLeft = 500;
-
-bool started = false;
+Test bubblePump;
 
 void setup(void)
 {
@@ -26,15 +23,8 @@ void setup(void)
     buffer.setTextColor(GREEN);
     buffer.setFont(&fonts::FreeMono9pt7b);
     buffer.createSprite(240, 135);
-}
 
-void drawBubble()
-{
-    buffer.clear();
-    buffer.drawCircle(120, 72, r, CYAN);
-
-    buffer.drawCircle(120, 72, 70, RED);
-    buffer.drawCircle(120, 72, 40, RED);
+    bubblePump.setup(std::make_shared<LGFX_Sprite>(&buffer));
 }
 
 void gameOver()
@@ -49,9 +39,6 @@ void gameOver()
     {
         if (StickCP2.BtnA.wasClicked())
         {
-            r = 1;
-            timeLeft = 500;
-            started = false;
             return;
         }
 
@@ -71,9 +58,6 @@ void gameOverWin()
     {
         if (StickCP2.BtnA.wasClicked())
         {
-            r = 1;
-            timeLeft = 500;
-            started = false;
             return;
         }
 
@@ -83,46 +67,20 @@ void gameOverWin()
 
 void loop(void)
 {
-    unsigned long loopStartTime = millis(); // Store the start time of the loop
+    LevelResult result = bubblePump.render(StickCP2.BtnA.wasClicked());
 
-    drawBubble();
-    buffer.setCursor(10, 10);
-    buffer.printf("Time left: %d", timeLeft / 100);
-
-    if (StickCP2.BtnA.wasClicked())
-    {
-        r += 3;
-    }
-
-    if (r > 70)
+    if (result == LevelResult::GameOver)
     {
         gameOver();
     }
-
-    if (r > 40 && r <= 70)
-    {
-        timeLeft -= millis() - loopStartTime;
-    }
-
-    if (r > 45)
-    {
-        started = true;
-    }
-
-    if (r < 40 && started)
-    {
-        gameOver();
-    }
-
-    if (timeLeft <= 0)
+    else if (result == LevelResult::GameOverWin)
     {
         gameOverWin();
     }
 
-    if (r > 1 && millis() - last > 100)
+    if (StickCP2.BtnB.wasClicked())
     {
-        r--;
-        last = millis();
+        ESP.restart();
     }
 
     buffer.pushSprite(0, 0); // Push the buffer to the display
