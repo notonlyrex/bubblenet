@@ -1,36 +1,27 @@
 #include "level.hpp"
 
-class Test
+class Test : public Level
 {
 public:
-    void setup(std::shared_ptr<LGFX_Sprite> buffer)
+    virtual void setup(std::shared_ptr<LGFX_Sprite> buffer) override
     {
         this->buffer = buffer;
     }
 
-    LevelResult render(bool button = false)
+    virtual LevelResult render(bool button) override
     {
-        if (!buffer)
-        {
-            Serial.println("Buffer is null");
-            return LevelResult::GameOver;
-        }
-
         buffer->clear();
         buffer->setCursor(10, 10);
         buffer->print("Hello");
 
         return LevelResult::Continue;
     }
-
-private:
-    std::shared_ptr<LGFX_Sprite> buffer;
 };
 
-class BubblePump // : public Level
+class BubblePump : public Level
 {
 public:
-    void setup(std::shared_ptr<LGFX_Sprite> buffer)
+    virtual void setup(std::shared_ptr<LGFX_Sprite> buffer) override
     {
         this->buffer = buffer;
         r = 1;
@@ -38,7 +29,7 @@ public:
         started = false;
     }
 
-    LevelResult render(bool button = false)
+    virtual LevelResult render(bool button = false) override
     {
         unsigned long loopStartTime = millis();
 
@@ -87,7 +78,6 @@ public:
     }
 
 private:
-    std::shared_ptr<LGFX_Sprite> buffer;
     int r;
     bool started;
     long last;

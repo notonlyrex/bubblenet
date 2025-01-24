@@ -1,21 +1,19 @@
 #include <M5StickCPlus2.h>
 #pragma once
 
-class Level
-{
-public:
-    Level(LGFX_Sprite &buffer);
-    virtual void setup();
-    virtual void render();
-
-protected:
-    M5GFX display;
-    LGFX_Sprite buffer;
-};
-
 enum LevelResult
 {
     Continue,
     GameOver,
     GameOverWin
+};
+
+class Level
+{
+public:
+    virtual void setup(std::shared_ptr<LGFX_Sprite> buffer) = 0;
+    virtual LevelResult render(bool button) = 0;
+
+protected:
+    std::shared_ptr<LGFX_Sprite> buffer;
 };
