@@ -6,9 +6,9 @@ public:
     virtual void setup(std::shared_ptr<LGFX_Sprite> buffer) override
     {
         this->buffer = buffer;
-        isBubble = false;
-        x = 1;
-        y = 50;
+        isBubbleActive = false;
+        bubbleX = 1;
+        targetY = rand() % 100;
         timeLeft = 500;
         started = false;
     }
@@ -27,18 +27,18 @@ public:
             started = true;
         }
 
-        if (button && !isBubble)
+        if (button && !isBubbleActive)
         {
-            isBubble = true;
-            x = 1;
+            isBubbleActive = true;
+            bubbleX = 1;
         }
 
-        if (isBubble)
+        if (isBubbleActive)
         {
-            x += 5;
+            bubbleX += 5;
         }
 
-        y += move;
+        targetY += targetMoveSpeed;
 
         drawBubble();
         drawTarget();
@@ -48,9 +48,9 @@ public:
             return LevelResult::GameOver;
         }
 
-        if (x > 240)
+        if (bubbleX > 240)
         {
-            isBubble = false;
+            isBubbleActive = false;
         }
 
         if (started)
@@ -58,13 +58,13 @@ public:
             timeLeft -= millis() - loopStartTime;
         }
 
-        if (y <= 0 || y > 125)
+        if (targetY <= 0 || targetY > 125)
         {
-            move = -move;
+            targetMoveSpeed = -targetMoveSpeed;
         }
 
         // checking collision on bubble and target
-        if (isBubble && checkCollision(x, 72, 15, 220, y, 10, 10))
+        if (isBubbleActive && checkCollision(bubbleX, 72, 15, 220, targetY, 10, 10))
         {
             return LevelResult::Finished;
         }
@@ -73,23 +73,23 @@ public:
     }
 
 private:
-    int x;
-    int y;
-    int move = 2;
+    int bubbleX;
+    int targetY;
+    int targetMoveSpeed = 2;
     bool started;
     long last;
     int timeLeft;
-    bool isBubble = false;
+    bool isBubbleActive = false;
 
     void drawBubble()
     {
-        if (isBubble)
-            buffer->drawCircle(x, 72, 15, CYAN);
+        if (isBubbleActive)
+            buffer->drawCircle(bubbleX, 72, 15, CYAN);
     }
 
     void drawTarget()
     {
-        buffer->drawRect(220, y, 10, 10, RED);
+        buffer->drawRect(220, targetY, 10, 10, RED);
     }
 
     bool checkCollision(int bubbleX, int bubbleY, int bubbleRadius, int rectX, int rectY, int rectWidth, int rectHeight)
