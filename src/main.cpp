@@ -11,7 +11,13 @@
 
 LGFX_Sprite buffer(&StickCP2.Display);
 
-std::shared_ptr<Level> currentLevel;
+std::vector<std::shared_ptr<Level>> levels = {
+    std::make_shared<WifiBubble>(),
+    std::make_shared<BubblePump>(),
+    std::make_shared<BubbleSort>(),
+    std::make_shared<BubbleShoot>(),
+    std::make_shared<YouWinScreen>()};
+int currentLevel = 0;
 
 void setup(void)
 {
@@ -33,24 +39,23 @@ void setup(void)
     buffer.createSprite(240, 135);
 
     // level.setup(std::make_shared<LGFX_Sprite>(buffer));
-
-    currentLevel = std::make_shared<WifiBubble>();
-    currentLevel->setup(std::make_shared<LGFX_Sprite>(buffer));
+    currentLevel = 0;
+    levels[currentLevel]->setup(std::make_shared<LGFX_Sprite>(buffer));
 }
 
 void loop(void)
 {
-    LevelResult result = currentLevel->render(StickCP2.BtnA.wasClicked());
+    LevelResult result = levels[currentLevel]->render(StickCP2.BtnA.wasClicked());
 
     if (result == LevelResult::GameOver)
     {
-        currentLevel = std::make_shared<GameOverScreen>();
-        currentLevel->setup(std::make_shared<LGFX_Sprite>(buffer));
+        levels[currentLevel] = std::make_shared<GameOverScreen>();
+        levels[currentLevel]->setup(std::make_shared<LGFX_Sprite>(buffer));
     }
     else if (result == LevelResult::Finished)
     {
-        currentLevel = std::make_shared<YouWinScreen>();
-        currentLevel->setup(std::make_shared<LGFX_Sprite>(buffer));
+        currentLevel++;
+        levels[currentLevel]->setup(std::make_shared<LGFX_Sprite>(buffer));
     }
 
     if (StickCP2.BtnB.wasClicked())
