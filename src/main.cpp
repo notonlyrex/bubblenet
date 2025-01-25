@@ -8,7 +8,7 @@
 
 LGFX_Sprite buffer(&StickCP2.Display);
 
-std::shared_ptr<Level> level;
+std::shared_ptr<Level> currentLevel;
 
 void setup(void)
 {
@@ -29,23 +29,23 @@ void setup(void)
 
     // level.setup(std::make_shared<LGFX_Sprite>(buffer));
 
-    level = std::make_shared<BubblePump>();
-    level->setup(std::make_shared<LGFX_Sprite>(buffer));
+    currentLevel = std::make_shared<BubblePump>();
+    currentLevel->setup(std::make_shared<LGFX_Sprite>(buffer));
 }
 
 void loop(void)
 {
-    LevelResult result = level->render(StickCP2.BtnA.wasClicked());
+    LevelResult result = currentLevel->render(StickCP2.BtnA.wasClicked());
 
     if (result == LevelResult::GameOver)
     {
-        level = std::make_shared<GameOverScreen>();
-        level->setup(std::make_shared<LGFX_Sprite>(buffer));
+        currentLevel = std::make_shared<GameOverScreen>();
+        currentLevel->setup(std::make_shared<LGFX_Sprite>(buffer));
     }
     else if (result == LevelResult::Finished)
     {
-        level = std::make_shared<YouWinScreen>();
-        level->setup(std::make_shared<LGFX_Sprite>(buffer));
+        currentLevel = std::make_shared<YouWinScreen>();
+        currentLevel->setup(std::make_shared<LGFX_Sprite>(buffer));
     }
 
     if (StickCP2.BtnB.wasClicked())
