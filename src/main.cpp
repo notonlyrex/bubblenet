@@ -4,9 +4,11 @@
 
 #include "bubblepump.hpp"
 #include "gameover.hpp"
+#include "youwin.hpp"
 
 LGFX_Sprite buffer(&StickCP2.Display);
-GameOverScreen level;
+
+std::shared_ptr<Level> level;
 
 void setup(void)
 {
@@ -25,58 +27,25 @@ void setup(void)
     buffer.setFont(&fonts::FreeMono9pt7b);
     buffer.createSprite(240, 135);
 
-    level.setup(std::make_shared<LGFX_Sprite>(buffer));
-}
+    // level.setup(std::make_shared<LGFX_Sprite>(buffer));
 
-void gameOver()
-{
-    buffer.clear();
-    buffer.setTextDatum(middle_center);
-    buffer.setTextColor(RED);
-    buffer.print("YOU DIED");
-    buffer.pushSprite(0, 0); // Push the buffer to the display
-    delay(5000);
-    while (1)
-    {
-        if (StickCP2.BtnA.wasClicked())
-        {
-            return;
-        }
-
-        StickCP2.update();
-    }
-}
-
-void gameOverWin()
-{
-    buffer.setCursor(0, 0);
-    buffer.clear();
-    buffer.setTextColor(GREEN);
-    buffer.print("YOU WIN");
-    buffer.pushSprite(0, 0);
-    delay(5000);
-    while (1)
-    {
-        if (StickCP2.BtnA.wasClicked())
-        {
-            return;
-        }
-
-        StickCP2.update();
-    }
+    level = std::make_shared<BubblePump>();
+    level->setup(std::make_shared<LGFX_Sprite>(buffer));
 }
 
 void loop(void)
 {
-    LevelResult result = level.render(StickCP2.BtnA.wasClicked());
+    LevelResult result = level->render(StickCP2.BtnA.wasClicked());
 
     if (result == LevelResult::GameOver)
     {
-        gameOver();
+        level = std::make_shared<GameOverScreen>();
+        level->setup(std::make_shared<LGFX_Sprite>(buffer));
     }
-    else if (result == LevelResult::GameOverWin)
+    else if (result == LevelResult::Finished)
     {
-        gameOverWin();
+        level = std::make_shared<YouWinScreen>();
+        level->setup(std::make_shared<LGFX_Sprite>(buffer));
     }
 
     if (StickCP2.BtnB.wasClicked())

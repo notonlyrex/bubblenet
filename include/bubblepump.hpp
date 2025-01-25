@@ -47,7 +47,7 @@ public:
 
         if (timeLeft <= 0)
         {
-            return LevelResult::GameOverWin;
+            return LevelResult::Finished;
         }
 
         if (r > 1 && millis() - last > 100)

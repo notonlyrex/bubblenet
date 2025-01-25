@@ -5,7 +5,7 @@ enum LevelResult
 {
     Continue,
     GameOver,
-    GameOverWin
+    Finished
 };
 
 class Level

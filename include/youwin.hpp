@@ -1,6 +1,6 @@
 #include "level.hpp"
 
-class GameOverScreen : public Level
+class YouWinScreen : public Level
 {
 public:
     virtual void setup(std::shared_ptr<LGFX_Sprite> buffer) override
@@ -15,8 +15,8 @@ public:
         buffer->setTextDatum(middle_center);
         buffer->setCursor(20, 65);
         buffer->setFont(&fonts::FreeMonoBold18pt7b);
-        buffer->setTextColor(RED);
-        buffer->print("GAME OVER");
+        buffer->setTextColor(GREEN);
+        buffer->print("YOU WIN");
 
         if (millis() - start > 5000 && button)
         {
