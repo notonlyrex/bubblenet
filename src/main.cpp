@@ -7,6 +7,7 @@
 #include "gameover.hpp"
 #include "youwin.hpp"
 #include "bubblesort.hpp"
+#include "wifigame.hpp"
 
 LGFX_Sprite buffer(&StickCP2.Display);
 
@@ -33,7 +34,7 @@ void setup(void)
 
     // level.setup(std::make_shared<LGFX_Sprite>(buffer));
 
-    currentLevel = std::make_shared<BubbleSort>();
+    currentLevel = std::make_shared<WifiBubble>();
     currentLevel->setup(std::make_shared<LGFX_Sprite>(buffer));
 }
 
