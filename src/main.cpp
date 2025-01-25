@@ -12,11 +12,12 @@
 LGFX_Sprite buffer(&StickCP2.Display);
 
 std::vector<std::shared_ptr<Level>> levels = {
-    std::make_shared<WifiBubble>(),
-    std::make_shared<BubblePump>(),
+    // std::make_shared<WifiBubble>(),
+    // std::make_shared<BubblePump>(),
     std::make_shared<BubbleSort>(),
-    std::make_shared<BubbleShoot>(),
-    std::make_shared<YouWinScreen>()};
+    // std::make_shared<BubbleShoot>(),
+    // std::make_shared<YouWinScreen>()
+};
 int currentLevel = 0;
 
 void setup(void)

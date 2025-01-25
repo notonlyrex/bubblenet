@@ -16,6 +16,11 @@ public:
         values[2] = rand() % 10;
         values[3] = rand() % 10;
 
+        for (int i = 0; i < 4; i++)
+        {
+            moves[i] = moves[i] - rand() % 20;
+        }
+
         if (checkWin())
         {
             std::sort(values, values + 4);
@@ -92,8 +97,6 @@ private:
 
         for (int i = 0; i < 4; i++)
         {
-            buffer->drawNumber(values[i], 20 + i * 60, moves[i]);
-
             if (active == i || (active + 1) == i)
             {
                 buffer->drawCircle(20 + i * 60, moves[i], 20, RED);
@@ -102,6 +105,8 @@ private:
             {
                 buffer->drawCircle(20 + i * 60, moves[i], 20, CYAN);
             }
+
+            buffer->drawNumber(values[i], 20 + i * 60, moves[i]);
         }
     }
 
