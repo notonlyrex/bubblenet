@@ -3,9 +3,10 @@
 #include <SPIFFS.h>
 
 #include "bubblepump.hpp"
+#include "gameover.hpp"
 
 LGFX_Sprite buffer(&StickCP2.Display);
-BubblePump bubblePump;
+GameOverScreen level;
 
 void setup(void)
 {
@@ -24,7 +25,7 @@ void setup(void)
     buffer.setFont(&fonts::FreeMono9pt7b);
     buffer.createSprite(240, 135);
 
-    bubblePump.setup(std::make_shared<LGFX_Sprite>(buffer));
+    level.setup(std::make_shared<LGFX_Sprite>(buffer));
 }
 
 void gameOver()
@@ -67,7 +68,7 @@ void gameOverWin()
 
 void loop(void)
 {
-    LevelResult result = bubblePump.render(StickCP2.BtnA.wasClicked());
+    LevelResult result = level.render(StickCP2.BtnA.wasClicked());
 
     if (result == LevelResult::GameOver)
     {

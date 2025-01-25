@@ -1,23 +1,5 @@
 #include "level.hpp"
 
-class Test : public Level
-{
-public:
-    virtual void setup(std::shared_ptr<LGFX_Sprite> buffer) override
-    {
-        this->buffer = buffer;
-    }
-
-    virtual LevelResult render(bool button) override
-    {
-        buffer->clear();
-        buffer->setCursor(10, 10);
-        buffer->print("Hello");
-
-        return LevelResult::Continue;
-    }
-};
-
 class BubblePump : public Level
 {
 public:
