@@ -15,8 +15,12 @@ public:
         values[1] = rand() % 10;
         values[2] = rand() % 10;
         values[3] = rand() % 10;
-        std::sort(values, values + 4);
-        std::reverse(values, values + 4);
+
+        if (checkWin())
+        {
+            std::sort(values, values + 4);
+            std::reverse(values, values + 4);
+        }
     }
 
     virtual LevelResult render(bool button) override

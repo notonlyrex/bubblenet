@@ -20,6 +20,7 @@ public:
 
         if (millis() - start > 5000 && button)
         {
+            ESP.restart();
             return LevelResult::Finished;
         }
 
