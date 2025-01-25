@@ -6,6 +6,7 @@
 #include "shoot.hpp"
 #include "gameover.hpp"
 #include "youwin.hpp"
+#include "bubblesort.hpp"
 
 LGFX_Sprite buffer(&StickCP2.Display);
 
@@ -16,6 +17,8 @@ void setup(void)
     auto cfg = M5.config();
     StickCP2.begin(cfg);
     Serial.begin(115200);
+
+    srand(StickCP2.Rtc.getDateTime().time.seconds);
 
     StickCP2.Display.startWrite();
     StickCP2.Display.setRotation(1);
@@ -30,7 +33,7 @@ void setup(void)
 
     // level.setup(std::make_shared<LGFX_Sprite>(buffer));
 
-    currentLevel = std::make_shared<BubbleShoot>();
+    currentLevel = std::make_shared<BubbleSort>();
     currentLevel->setup(std::make_shared<LGFX_Sprite>(buffer));
 }
 

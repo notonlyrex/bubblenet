@@ -11,7 +11,7 @@ public:
         started = false;
     }
 
-    virtual LevelResult render(bool button = false) override
+    virtual LevelResult render(bool button) override
     {
         unsigned long loopStartTime = millis();
 
