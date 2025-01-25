@@ -16,11 +16,10 @@ public:
         buffer->setCursor(20, 65);
         buffer->setFont(&fonts::FreeMonoBold18pt7b);
         buffer->setTextColor(GREEN);
-        buffer->print("YOU WIN");
+        buffer->drawCenterString("YOU WIN!", 120, 65);
 
         if (millis() - start > 5000 && button)
         {
-            ESP.restart();
             return LevelResult::Finished;
         }
 

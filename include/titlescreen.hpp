@@ -25,8 +25,8 @@ public:
         buffer->setFont(&fonts::FreeMonoBold18pt7b);
         buffer->setTextColor(BLACK);
         buffer->drawCenterString("BUBBLENET", 120, 65);
-        buffer->setFont(&fonts::FreeMono9pt7b);
-        buffer->drawCenterString("Press the button", 120, 110);
+        buffer->setFont(&fonts::efontJA_16_b);
+        buffer->drawCenterString("ボタンを押してください", 120, 110);
 
         if (button && (millis() - start > 1000))
         {

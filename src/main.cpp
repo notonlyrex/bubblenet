@@ -9,18 +9,20 @@
 #include "bubblesort.hpp"
 #include "wifigame.hpp"
 #include "intro.hpp"
+#include "outro.hpp"
 #include "titlescreen.hpp"
 
 LGFX_Sprite buffer(&StickCP2.Display);
 
 std::vector<std::shared_ptr<Level>> levels = {
     std::make_shared<TitleScreen>(),
-    std::make_shared<IntroScreen>(),
+    // std::make_shared<IntroScreen>(),
     // std::make_shared<WifiBubble>(),
-    // std::make_shared<BubblePump>(),
-    std::make_shared<BubbleSort>(),
     // std::make_shared<BubbleShoot>(),
-    // std::make_shared<YouWinScreen>()
+    // std::make_shared<BubblePump>(),
+    // std::make_shared<BubbleSort>(),
+    // std::make_shared<YouWinScreen>(),
+    // std::make_shared<OutroScreen>(),
 };
 int currentLevel = 0;
 
@@ -60,6 +62,10 @@ void loop(void)
     else if (result == LevelResult::Finished)
     {
         currentLevel++;
+        if (currentLevel >= levels.size())
+        {
+            ESP.restart();
+        }
         levels[currentLevel]->setup(std::make_shared<LGFX_Sprite>(buffer));
     }
 
