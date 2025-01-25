@@ -3,6 +3,7 @@
 #include <SPIFFS.h>
 
 #include "bubblepump.hpp"
+#include "shoot.hpp"
 #include "gameover.hpp"
 #include "youwin.hpp"
 
@@ -29,7 +30,7 @@ void setup(void)
 
     // level.setup(std::make_shared<LGFX_Sprite>(buffer));
 
-    currentLevel = std::make_shared<BubblePump>();
+    currentLevel = std::make_shared<BubbleShoot>();
     currentLevel->setup(std::make_shared<LGFX_Sprite>(buffer));
 }
 
