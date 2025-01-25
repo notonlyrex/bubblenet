@@ -8,10 +8,14 @@
 #include "youwin.hpp"
 #include "bubblesort.hpp"
 #include "wifigame.hpp"
+#include "intro.hpp"
+#include "titlescreen.hpp"
 
 LGFX_Sprite buffer(&StickCP2.Display);
 
 std::vector<std::shared_ptr<Level>> levels = {
+    std::make_shared<TitleScreen>(),
+    std::make_shared<IntroScreen>(),
     // std::make_shared<WifiBubble>(),
     // std::make_shared<BubblePump>(),
     std::make_shared<BubbleSort>(),
