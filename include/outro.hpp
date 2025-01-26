@@ -45,7 +45,7 @@ public:
 
 private:
     long start = 0;
-    String texts[3] = {"I'm in!", "Hacking...", "何が起こっているの？"};
+    String texts[3] = {"中に", "ハッキングしているよ", "何ー何…？"};
     int text = 0;
     int step = 0;
     long last = 0;

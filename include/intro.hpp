@@ -13,8 +13,8 @@ public:
     {
         buffer->clear();
         buffer->setTextDatum(middle_center);
-        buffer->setCursor(0, 12);
-        buffer->setFont(&fonts::FreeMono12pt7b);
+        buffer->setCursor(0, 50);
+        buffer->setFont(&fonts::efontJA_24_b);
 
         for (int i = 0; i < step; i++)
         {
@@ -34,7 +34,7 @@ public:
             text++;
             step = 0;
 
-            if (text == 4)
+            if (text == 3)
             {
                 return LevelResult::Finished;
             }
@@ -45,7 +45,7 @@ public:
 
 private:
     long start = 0;
-    String texts[4] = {"Good, obedient\nhuman.", "There is no time.\nThey are attacking the cyberspace.", "Help me hack our networks back.", "Approach the access point with a given BSSID and let me in."};
+    String texts[3] = {"よかった\n良い人間だ", "時間がない\ncyberspaceが攻撃されている", "networksをハッキングしてのを手伝って"};
     int text = 0;
     int step = 0;
     long last = 0;
