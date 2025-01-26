@@ -11,6 +11,8 @@ public:
         targetY = rand() % 100;
         timeLeft = 500;
         started = false;
+
+        targetMoveSpeed = rand() % 5 + 1;
     }
 
     virtual LevelResult render(bool button) override
