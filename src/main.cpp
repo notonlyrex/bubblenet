@@ -21,13 +21,13 @@ std::vector<std::shared_ptr<Level>> levels = {
     // std::make_shared<InstructionScreen>("ボタンを押してスキャンして\nBSSID を持つ WAP に近づく"),
     // std::make_shared<WifiBubble>(),
     // std::make_shared<InstructionScreen>("俺をネットワークに注入して"),
-    std::make_shared<BubbleShoot>(),
+    // std::make_shared<BubbleShoot>(),
     // std::make_shared<InstructionScreen>("俺のサイズをぴったりになる"),
     // std::make_shared<BubblePump>(),
     // std::make_shared<InstructionScreen>("もうすぐそこ。\n数字を小さい順に並べる"),
-    // std::make_shared<BubbleSort>(),
+    std::make_shared<BubbleSort>(),
     // std::make_shared<YouWinScreen>(),
-    std::make_shared<OutroScreen>(),
+    // std::make_shared<OutroScreen>(),
     // std::make_shared<GameOverScreen>()};
 };
 

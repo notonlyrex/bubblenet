@@ -19,7 +19,7 @@ public:
         drawBubble();
 
         buffer->setCursor(0, 12);
-        buffer->setFont(&fonts::lgfxJapanMinchoP_12);
+        buffer->setFont(&fonts::efontJA_16_b);
         buffer->printf("残り時間: %.1fs", timeLeft / 100.0f);
 
         if (button)

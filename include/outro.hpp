@@ -14,11 +14,22 @@ public:
         buffer->clear();
         buffer->setTextDatum(middle_center);
         buffer->setCursor(0, 50);
-        buffer->setFont(&fonts::efontJA_24_b);
+
+        if (text == 3)
+            buffer->setFont(&fonts::lgfxJapanMincho_40);
+        else
+            buffer->setFont(&fonts::efontJA_24_b);
 
         for (int i = 0; i < step; i++)
         {
-            buffer->print(texts[text][i]);
+            if (text == 2)
+            {
+                buffer->print((char)(rand() % 128));
+            }
+            else
+            {
+                buffer->print(texts[text][i]);
+            }
         }
 
         if (millis() - last > 50)
@@ -34,7 +45,7 @@ public:
             text++;
             step = 0;
 
-            if (text == 3)
+            if (text == 4)
             {
                 return LevelResult::Finished;
             }
@@ -45,7 +56,8 @@ public:
 
 private:
     long start = 0;
-    String texts[3] = {"中に", "ハッキングしているよ", "何ー何…？"};
+    String texts[4] = {"中に", "ハッキングしているよ", "12345678901234567890",
+                       "何…！"};
     int text = 0;
     int step = 0;
     long last = 0;

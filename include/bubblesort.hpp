@@ -34,9 +34,9 @@ public:
         buffer->clear();
 
         buffer->setTextColor(GREEN);
-        buffer->setFont(&fonts::FreeMono9pt7b);
-        buffer->setCursor(0, 10);
-        buffer->printf("Time left: %.1fs", timeLeft / 100.0f);
+        buffer->setCursor(0, 12);        
+        buffer->setFont(&fonts::efontJA_16_b);
+        buffer->printf("残り時間: %.1fs", timeLeft / 100.0f);
 
         if (started)
         {
