@@ -26,8 +26,9 @@ public:
             }
 
             int targetId = rand() % n;
-            // target = WiFi.BSSIDstr(targetId);
-            target = "C6:97:85:3C:02:1C";
+            target = WiFi.BSSIDstr(targetId);
+            // target = "C6:97:85:3C:02:1C"; // selene
+            // target = "60:22:32:72:2F:CE"; // WSEI
             Serial.println(WiFi.SSID(targetId));
             Serial.println(target);
 
@@ -90,7 +91,7 @@ public:
                 }
             }
 
-            if (targetSignal <= 40)
+            if (targetSignal <= 50)
             {
                 return LevelResult::Finished;
             }
