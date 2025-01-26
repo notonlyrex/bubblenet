@@ -18,7 +18,7 @@ public:
     {
         buffer->clear();
         buffer->setTextDatum(middle_center);
-        buffer->setCursor(0, 50);
+        buffer->setCursor(0, 26);
         buffer->setTextColor(WHITE);
         buffer->setFont(&fonts::efontJA_24_b);
 
