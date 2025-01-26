@@ -18,6 +18,9 @@ public:
         buffer->setTextColor(GREEN);
         buffer->drawCenterString("YOU WIN!", 120, 65);
 
+        buffer->setFont(&fonts::efontJA_16_b);
+        buffer->drawCenterString("ハッキングは完了した", 120, 95);
+
         if (millis() - start > 5000 && button)
         {
             return LevelResult::Finished;

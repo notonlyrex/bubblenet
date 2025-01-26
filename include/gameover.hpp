@@ -18,6 +18,9 @@ public:
         buffer->setTextColor(RED);
         buffer->print("GAME OVER");
 
+        buffer->setFont(&fonts::efontJA_16_b);
+        buffer->drawCenterString("ゲイムはここで終わりだ", 120, 95);
+
         if (millis() - start > 5000 && button)
         {
             return LevelResult::Finished;
