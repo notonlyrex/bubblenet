@@ -24,7 +24,7 @@ public:
 
         if (button)
         {
-            r += 3;
+            r += bubbleGrowth;
         }
 
         if (r > 70)
@@ -40,6 +40,7 @@ public:
         if (r > 45)
         {
             started = true;
+            bubbleGrowth = 5;
         }
 
         if (r < 40 && started)
@@ -66,6 +67,7 @@ private:
     bool started;
     long last;
     int timeLeft;
+    int bubbleGrowth = 3;
 
     void drawBubble()
     {
